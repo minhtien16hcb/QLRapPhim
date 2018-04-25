@@ -323,7 +323,6 @@ public class Quanlydatve_1 extends javax.swing.JFrame {
          public void laydanhsachKH()
     {
         try {
-            xoadanhsachPDV();
             KhachHangDAO kh=new KhachHangDAO();
             List<KhachHangDTO> list=kh.laydanhsachKH();
             for(int i=0;i<list.size();i++)
@@ -335,22 +334,6 @@ public class Quanlydatve_1 extends javax.swing.JFrame {
             Logger.getLogger(Quanlyphim.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
-          public void xoadanhsachPDV()
-    {
-         try {
-            
-            PhieuDatVeDAO pc=new PhieuDatVeDAO();
-            List<PhieuDatVeDTO> list= pc.laydanhsachphieudatve();
-         
-             DefaultTableModel model = (DefaultTableModel) jTable6.getModel();
-            
-           model.getDataVector().removeAllElements();
-            model.fireTableDataChanged();
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Quanlyphim.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -537,6 +520,10 @@ public void laydanhsachphieudat()
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Quanlydatve_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

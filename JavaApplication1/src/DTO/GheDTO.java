@@ -51,11 +51,22 @@ public class GheDTO {
         this.TINHTRANG = TINHTRANG;
     }
     
+   public String getDayGhe() {
+        return DayGhe;
+    }
+
+    public void setDayGhe(String DayGhe) {
+        this.DayGhe = DayGhe;
+    }
+    
+    
+    
     public String MAGHE;
     public String MALG;
     public String VITRI;
     public String MAPC;
      public String TINHTRANG;
-    
+     
+      public String DayGhe;
     
 }
