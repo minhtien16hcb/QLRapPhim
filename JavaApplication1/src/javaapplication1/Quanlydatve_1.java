@@ -136,6 +136,8 @@ public class Quanlydatve_1 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("Mã Vé");
 
+        txt_maphieu1.setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Phòng chiếu");
 
@@ -211,6 +213,11 @@ public class Quanlydatve_1 extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTable6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable6MouseClicked(evt);
             }
         });
         jScrollPane6.setViewportView(jTable6);
@@ -383,18 +390,20 @@ public class Quanlydatve_1 extends javax.swing.JFrame {
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:
-       // try {
+        try {
 
             // TODO add your handling code here:
-            //PhieuDatVeDTO phim =new PhieuDatVeDTO();
-           // PhieuDatVeDAO phimdao=new PhieuDatVeDAO();
-           // phim.setMAPDV((jTable6.getValueAt(jTable6.getSelectedRow(), 0).toString()));
-           // phim.setSLVE((jTable6.getValueAt(jTable6.getSelectedRow(), 1).toString()));
-            //phim.setGIODV(Integer.parseInt(jTable6.getValueAt(jTable6.getSelectedRow(), 2).toString()));
-           // phim.setTINHTRANG((jTable1.getValueAt(jTable6.getSelectedRow(), 3).toString()));
-          //  phim.setMAKH(Integer.parseInt(jTable6.getValueAt(jTable6.getSelectedRow(), 4).toString()));
-           // phim.setMANV((jTable6.getValueAt(jTable6.getSelectedRow(), 5).toString()));
-           // phimdao.capnhatphieudatve(phim);
+            PhieuDatVeDTO phim =new PhieuDatVeDTO();
+            PhieuDatVeDAO phimdao=new PhieuDatVeDAO();
+            phim.setMAVE(txt_maphieu1.getText());
+            phim.setNGAYCHIEU(Date.valueOf(LocalDate.now()));
+            phim.setTENCC(cbb_cc.getSelectedItem().toString());
+            phim.setTENKH(txt_kh.getText().toString());
+            phim.setTENPC(cbb_day.getSelectedItem().toString());
+           // phim.setTENNV("admin");
+            phim.setTENPHIM(cbb_phim.getSelectedItem().toString());
+            phim.setTENGHE(txt_ghe.getText().toString());
+            phimdao.capnhatphieudatve(phim);
             System.out.print((jTable6.getValueAt(jTable6.getSelectedRow(), 0)));
            // System.out.print((jTable6.getValueAt(jTable6.getSelectedRow(), 1)));
            // System.out.print((jTable6.getValueAt(jTable6.getSelectedRow(), 2)));
@@ -402,9 +411,10 @@ public class Quanlydatve_1 extends javax.swing.JFrame {
             
          //     JOptionPane.showMessageDialog(null, "cap nhat thanh cong ",
        //           "Title", JOptionPane.WARNING_MESSAGE);
-       // } catch (ClassNotFoundException ex) {
-      //      Logger.getLogger(Quanlyphim.class.getName()).log(Level.SEVERE, null, ex);
-      //  }
+            laydanhsachphieudat();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Quanlyphim.class.getName()).log(Level.SEVERE, null, ex);
+        }
          
     }//GEN-LAST:event_btnCapNhatActionPerformed
      private ValidationResult validateIt() {
@@ -479,6 +489,16 @@ public class Quanlydatve_1 extends javax.swing.JFrame {
                   );
         }
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void jTable6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable6MouseClicked
+        // TODO add your handling code here:
+        txt_maphieu1.setText((jTable6.getValueAt(jTable6.getSelectedRow(), 0).toString()));
+        cbb_phim.setSelectedItem((jTable6.getValueAt(jTable6.getSelectedRow(), 1).toString()));
+      //  txt_kh.setText((jTable6.getValueAt(jTable6.getSelectedRow(), 2).toString()));
+        cbb_cc.setSelectedItem((jTable6.getValueAt(jTable6.getSelectedRow(), 3).toString()));
+        txt_ghe.setText((jTable6.getValueAt(jTable6.getSelectedRow(), 5).toString()));
+        cbb_day.setSelectedItem((jTable6.getValueAt(jTable6.getSelectedRow(), 6).toString()));
+    }//GEN-LAST:event_jTable6MouseClicked
    
       public void xoadanh()
     {

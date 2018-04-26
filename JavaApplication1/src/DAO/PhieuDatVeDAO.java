@@ -261,7 +261,7 @@ public class PhieuDatVeDAO {
         try {
             
 
-            String sql="UPDATE PHIEUDATVE SET TENCC=?, TENKH=?, TENPC=?,TENPHIM=?,TENGHE=? WHERE MAVE =?";
+            String sql="UPDATE VE SET TENCC=?, TENKH=?, TENPC=?,TENPHIM=?,TENGHE=? WHERE MAVE =?";
             PreparedStatement ps=a.prepareStatement(sql);
            ps.setString(1,phieudatve.getTENCC());
            ps.setString(2,phieudatve.getTENKH());
@@ -272,6 +272,7 @@ public class PhieuDatVeDAO {
            ps.setString(6,phieudatve.getMAVE());
            ps.executeUpdate();
            System.out.print("cap nhat phieu dat ve thanh cong ");
+           laydanhsachphieudatve();
         } catch (SQLException ex) {
           Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
