@@ -49,7 +49,7 @@ public class GheDAO {
         }
         
             Statement statement = a.createStatement();
-            rs=statement.executeQuery("select top 1 * from RAP where dayghe = '"+dayghe+"' order by MaRap desc");
+            rs=statement.executeQuery("select top 1 * from Ghe where dayghe = '"+dayghe+"' order by MaGhe desc");
             while(rs.next())
             {
               ma = rs.getString("MaGhe");
@@ -63,7 +63,7 @@ public class GheDAO {
                  
             
             String[] split = ma.split(dayghe);
-            String  m = split[0].toString().trim();
+            String  m = split[1].toString().trim();
             int n = Integer.parseInt(m);
             if(n < 9)
             {
@@ -288,10 +288,10 @@ public class GheDAO {
             PreparedStatement ps=a.prepareStatement(sql);
            ps.setString(1,pc.getMALG());
            ps.setString(2, pc.getMAPC());
-            ps.setString(3, pc.getMAGHE());
-             ps.setString(4, pc.getDayGhe());
-            ps.setString(5, pc.getTINHTRANG());
-         
+           
+             ps.setString(3, pc.getDayGhe());
+            ps.setString(4, pc.getTINHTRANG());
+          ps.setString(5, pc.getMAGHE());
            
            ps.executeUpdate();
            System.out.print("Cập nhật thành công ");

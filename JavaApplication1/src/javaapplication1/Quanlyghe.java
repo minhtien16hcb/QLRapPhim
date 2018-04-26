@@ -76,6 +76,7 @@ public class Quanlyghe extends javax.swing.JFrame {
             for(int i=0;i<list.size();i++)
             {
                 cboMaPC.addItem(list.get(i).getMAPC());
+    
             }
             
         } catch (ClassNotFoundException ex) {
@@ -361,7 +362,7 @@ public class Quanlyghe extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -377,10 +378,10 @@ public class Quanlyghe extends javax.swing.JFrame {
                 
             
             GheDTO pc=new GheDTO();
-            pc.setMAGHE(txtMaGhe.getText().toString());
-            pc.setMALG(cboDay.getSelectedItem().toString());
-             pc.setMAPC(cboMaPC.getSelectedItem().toString());
-             
+            pc.setMAGHE(PhatSinhMa(cboDay.getSelectedItem().toString()));
+            pc.setMALG(cboMaLG.getSelectedItem().toString());
+            pc.setMAPC(cboMaPC.getSelectedItem().toString());
+             pc.setDayGhe(cboDay.getSelectedItem().toString());
             pc.setTINHTRANG(cboTinhTrang.getSelectedItem().toString());
           
           
@@ -411,10 +412,7 @@ public class Quanlyghe extends javax.swing.JFrame {
     private ValidationResult validateIt() {
         ValidationResult validationResult = new ValidationResult();
         
-        if (ValidationUtils.isEmpty(txtMaGhe.getText())) {
-            validationResult.addError("Ma Ghe Khong Duoc TRong");
-           
-        } 
+        
         
          
 
@@ -436,7 +434,7 @@ public class Quanlyghe extends javax.swing.JFrame {
             
             for(int i=0;i<list.size();i++)
             {
-              model.addRow(new Object[]{list.get(i).getMAGHE(),list.get(i).getMALG(),list.get(i).getMAPC(),list.get(i).getVITRI(),list.get(i).getTINHTRANG()});
+              model.addRow(new Object[]{list.get(i).getMAGHE(),list.get(i).getDayGhe(),list.get(i).getMALG(),list.get(i).getMAPC(),list.get(i).getTINHTRANG()});
             }
        
         } catch (ClassNotFoundException ex) {
@@ -469,17 +467,18 @@ public class Quanlyghe extends javax.swing.JFrame {
             GheDTO pc =new GheDTO();
             GheDAO pcdao=new GheDAO();
             pc.setMAGHE((grvGhe.getValueAt(grvGhe.getSelectedRow(), 0).toString()));
-            pc.setMALG((grvGhe.getValueAt(grvGhe.getSelectedRow(), 1).toString()));
-            pc.setMAPC((grvGhe.getValueAt(grvGhe.getSelectedRow(), 2).toString()));
-           pc.setVITRI((grvGhe.getValueAt(grvGhe.getSelectedRow(), 3).toString()));
+             pc.setDayGhe((grvGhe.getValueAt(grvGhe.getSelectedRow(), 1).toString()));
+            pc.setMALG((grvGhe.getValueAt(grvGhe.getSelectedRow(), 2).toString()));
+            pc.setMAPC((grvGhe.getValueAt(grvGhe.getSelectedRow(), 3).toString()));
+           
             pc.setTINHTRANG((grvGhe.getValueAt(grvGhe.getSelectedRow(), 4).toString()));
              
           
              
              pc.setMAGHE(txtMaGhe.getText());
-            pc.setMALG(cboDay.getSelectedItem().toString());
+            pc.setMALG(cboMaLG.getSelectedItem().toString());
               pc.setMAPC(cboMaPC.getSelectedItem().toString());
-           
+              pc.setDayGhe(cboDay.getSelectedItem().toString());
             pc.setTINHTRANG(cboTinhTrang.getSelectedItem().toString());
        
            
@@ -527,7 +526,8 @@ public class Quanlyghe extends javax.swing.JFrame {
         
            txtMaGhe.setText((grvGhe.getValueAt(grvGhe.getSelectedRow(), 0).toString()));
             cboDay.setSelectedItem((grvGhe.getValueAt(grvGhe.getSelectedRow(), 1).toString()));
-            cboMaPC.setSelectedItem((grvGhe.getValueAt(grvGhe.getSelectedRow(), 2).toString()));
+              cboMaLG.setSelectedItem((grvGhe.getValueAt(grvGhe.getSelectedRow(), 2).toString()));
+            cboMaPC.setSelectedItem((grvGhe.getValueAt(grvGhe.getSelectedRow(), 3).toString()));
            
             cboTinhTrang.setSelectedItem((grvGhe.getValueAt(grvGhe.getSelectedRow(),4).toString()));
             
