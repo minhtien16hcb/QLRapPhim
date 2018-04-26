@@ -6,6 +6,9 @@
 package DAO;
 
 import Connection.Sqlconnect;
+import static DAO.PhimDAO.a;
+import static DAO.PhimDAO.rs;
+import static DAO.PhimDAO.sqlcn;
 import DTO.PhimDTO;
 import DTO.PhieuDatVeDTO;
 import DTO.RapDTO;
@@ -29,6 +32,108 @@ public class PhieuDatVeDAO {
    public static Connection a;
    public static ResultSet rs;
    public static  Sqlconnect sqlcn;
+     public List<PhimDTO> laydanhsachphim() throws ClassNotFoundException 
+    {
+         sqlcn=new Sqlconnect();
+     
+         List<PhimDTO> list=new ArrayList();
+     
+      
+     
+     
+        try {
+              a =sqlcn.getSQLServerConnection();
+           System.out.print("ket noi thanh cong ");
+             
+            
+        } catch (SQLException ex) {
+             System.out.print("khong the ket noi den SQLserver ");
+             
+        }
+        try {
+            Statement statement = a.createStatement();
+            rs=statement.executeQuery("select * from PHIM");
+             System.out.print("truy van thanh cong ");
+            
+        } catch (SQLException ex) {
+           System.out.print("loi khong the thuc hien truy van ");
+        }
+         System.out.print("\n Danh sach Hoc Sinh");
+        try {
+          
+            while(rs.next())
+            {
+  
+                  PhimDTO phim=new PhimDTO();
+               phim.setMAPHIM(rs.getString("MAPHIM"));
+               phim.setTENPHIM(rs.getString("TENPHIM"));
+                phim.setNAMSX(rs.getInt("NAMSX"));
+               phim.setHANGPHIM(rs.getString("HANGPHIM"));
+                 phim.setTHOILUONG(rs.getInt("THOILUONG"));
+                   phim.setMOTA(rs.getString("MOTA"));
+               list.add(phim);
+               
+            }
+        } catch (SQLException ex) {
+            System.out.print("loi khong the khoi tao hoc sinh ");
+            
+        }
+         
+        
+        return list;
+    }
+    
+   public String PhatSinhPDV() throws SQLException, ClassNotFoundException
+   {
+        sqlcn=new Sqlconnect();
+         //Statement statement = a.createStatement();
+        //ResultSet rs1=statement.executeQuery("select top 1 MaRap from RAP where MaRap = " + );
+      
+      
+      String ma = "";
+     
+        try {
+              a =sqlcn.getSQLServerConnection();
+        
+             
+            
+        } catch (SQLException ex) {
+             System.out.print("khong the ket noi den SQLserver ");
+             
+        }
+        
+            Statement statement = a.createStatement();
+            rs=statement.executeQuery("select top 1 * from VE order by MAVE desc");
+            while(rs.next())
+            {
+              ma = rs.getString("MAVE");
+            }
+            
+            if(ma == "")
+            {
+                    ma = "V/0" +  1;
+                    return ma;
+            }
+                 
+            
+            String[] split = ma.split("/");
+            String  m = split[1].toString().trim();
+            int n = Integer.parseInt(m);
+            if(n < 9)
+            {
+                n = n + 1;
+                ma = "V/0" +  n;
+                
+            }
+            else
+            {
+                 n = n + 1;
+                ma = "V/" +  n;
+            }
+         return  ma;
+   } 
+   
+   
     public void themmotphieudat(PhieuDatVeDTO phieu) throws ClassNotFoundException 
     {
            sqlcn=new Sqlconnect();
@@ -42,14 +147,17 @@ public class PhieuDatVeDAO {
              
         }
         try {
-            String sql="insert into PHIEUDATVE values(?,?,?,?,?,?)";
+            String sql="insert into VE values(?,?,?,?,?,?,?,?)";
             PreparedStatement ps=a.prepareStatement(sql);
-           ps.setString(1,phieu.MAPDV );
-           ps.setInt(2, phieu.SLVE);
-           ps.setDate(3,Date.valueOf(LocalDate.now()));
-           ps.setString(4, phieu.TINHTRANG);
-           ps.setString(5, phieu.MAKH);
-           ps.setString(6, "1");
+           ps.setString(1,phieu.MAVE );
+           ps.setDate(2, Date.valueOf(LocalDate.now()));
+          
+           ps.setString(3, phieu.TENCC);
+           ps.setString(4, phieu.TENKH);
+           ps.setString(5, phieu.TENPC);
+           ps.setString(6, phieu.TENNV);
+           ps.setString(7, phieu.TENPHIM);
+           ps.setString(8, phieu.TENGHE);
            ps.executeUpdate();
            System.out.print("them phieu dat thanh cong ");
             
@@ -78,7 +186,7 @@ public class PhieuDatVeDAO {
         }
         try {
             Statement statement = a.createStatement();
-            rs=statement.executeQuery("select * from PHIEUDATVE");
+            rs=statement.executeQuery("select * from VE");
              System.out.print("truy van thanh cong ");
             
         } catch (SQLException ex) {
@@ -90,13 +198,15 @@ public class PhieuDatVeDAO {
             while(rs.next())
             {
 
-                  PhieuDatVeDTO phieudat=new PhieuDatVeDTO();
-               phieudat.setMAPDV(rs.getString("MAPDV"));
-                phieudat.setSLVE(rs.getInt("SLVE"));
-                phieudat.setGIODV(rs.getDate("GIODV"));
-              phieudat.setTINHTRANG(rs.getString("TINHTRANG"));
-                 phieudat.setMAKH(rs.getString("MAKH"));
-                  phieudat.setMANV(rs.getString("MANV"));
+                PhieuDatVeDTO phieudat=new PhieuDatVeDTO();
+               phieudat.setMAVE(rs.getString("MAVE"));
+                phieudat.setNGAYCHIEU(rs.getDate("NGAYCHIEU"));
+                phieudat.setTENCC(rs.getString("TENCC"));
+              phieudat.setTENKH(rs.getString("TENKH"));
+                 phieudat.setTENPC(rs.getString("TENPC"));
+                  phieudat.setTENNV(rs.getString("TENNV"));
+                    phieudat.setTENPHIM(rs.getString("TENPHIM"));
+                  phieudat.setTENGHE(rs.getString("TENGHE"));
                
                list.add(phieudat);
                
@@ -125,9 +235,9 @@ public class PhieuDatVeDAO {
              
         }
         try {
-            String sql="DELETE PHIEUDATVE WHERE PHIEUDATVE.MAPDV= ?";
+            String sql="DELETE VE WHERE VE.MAVE= ?";
             PreparedStatement ps=a.prepareStatement(sql);
-           ps.setString(1,phieudatve.MAPDV );
+           ps.setString(1,phieudatve.MAVE );
            ps.executeUpdate();
            System.out.print("xoa bo phieu dat ve thanh cong ");
             
@@ -149,15 +259,17 @@ public class PhieuDatVeDAO {
              
         }
         try {
-            String sql="UPDATE PHIEUDATVE SET SLVE=?, GIODV=?, TINHTRANG=?,MAKH=?,MANV=? WHERE MAPDV =?";
+            
+
+            String sql="UPDATE PHIEUDATVE SET TENCC=?, TENKH=?, TENPC=?,TENPHIM=?,TENGHE=? WHERE MAVE =?";
             PreparedStatement ps=a.prepareStatement(sql);
-           ps.setInt(1,phieudatve.getSLVE());
-     
-           ps.setDate(2, phieudatve.getGIODV());
-           ps.setString(3, phieudatve.getTINHTRANG());
-           ps.setString(4, phieudatve.getMAKH());
-           ps.setString(5,phieudatve.getMANV());
-                ps.setString(6, phieudatve.getMAPDV());
+           ps.setString(1,phieudatve.getTENCC());
+           ps.setString(2,phieudatve.getTENKH());
+           ps.setString(3,phieudatve.getTENPC());
+         
+           ps.setString(4,phieudatve.getTENPHIM());
+           ps.setString(5,phieudatve.getTENGHE());
+           ps.setString(6,phieudatve.getMAVE());
            ps.executeUpdate();
            System.out.print("cap nhat phieu dat ve thanh cong ");
         } catch (SQLException ex) {
@@ -185,7 +297,7 @@ public class PhieuDatVeDAO {
         }
         try {
             Statement statement = a.createStatement();
-            rs=statement.executeQuery("select * from PHIEUDATVE");
+            rs=statement.executeQuery("select * from VE");
              System.out.print("truy van thanh cong ");
             
         } catch (SQLException ex) {

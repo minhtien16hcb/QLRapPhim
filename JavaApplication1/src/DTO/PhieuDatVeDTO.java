@@ -12,55 +12,67 @@ import java.sql.Date;
  * @author Admin
  */
 public class PhieuDatVeDTO {
-     public String getMAPDV() {
-        return MAPDV;
+     public String getMAVE() {
+        return MAVE;
+    }
+    public void setMAVE(String MAVE) {
+        this.MAVE = MAVE;
+    }
+    public Date getNGAYCHIEU() {
+        return NGAYCHIEU;
     }
 
-    public void setMAPDV(String MAPDV) {
-        this.MAPDV = MAPDV;
+    public void setNGAYCHIEU(Date NGAYCHIEU) {
+        this.NGAYCHIEU = NGAYCHIEU;
     }
     
-     public int getSLVE() {
-        return SLVE;
+    public String getTENCC() {
+        return TENCC;
     }
-
-    public void setSLVE(int SLVE) {
-        this.SLVE = SLVE;
+    public void setTENCC(String TENCC) {
+        this.TENCC = TENCC;
     }
-    public Date getGIODV() {
-        return GIODV;
+    public String getTENKH() {
+        return TENKH;
     }
-
-    public void setGIODV(Date GIODV) {
-        this.GIODV = GIODV;
+    public void setTENKH(String TENKH) {
+        this.TENKH = TENKH;
     }
     
-     public String getTINHTRANG() {
-        return TINHTRANG;
+    public String getTENNV() {
+        return TENNV;
     }
-
-    public void setTINHTRANG(String TINHTRANG) {
-        this.TINHTRANG = TINHTRANG;
+    public void setTENNV(String TENNV) {
+        this.TENKH = TENNV;
     }
     
-     public String getMAKH() {
-        return MAKH;
+    public String getTENPHIM() {
+        return TENPHIM;
     }
+    public void setTENPHIM(String TENPHIM) {
+        this.TENPHIM = TENPHIM;
+    }
+    
+    public String getTENGHE() {
+        return TENGHE;
+    }
+    public void setTENGHE(String TENGHE) {
+        this.TENGHE = TENGHE;
+    }
+    public String getTENPC() {
+        return TENPC;
+    }
+    public void setTENPC(String TENPC) {
+        this.TENPC = TENPC;
+    }
+    public String MAVE;
+    public Date NGAYCHIEU;
+    public String TENCC;
+    public String TENKH;
+    public String TENNV;
+    public String TENPC;
+    public String TENPHIM;
+    public String TENGHE;
 
-    public void setMAKH(String MAKH) {
-        this.MAKH = MAKH;
-    }
-    public String getMANV() {
-        return MANV;
-    }
 
-    public void setMANV(String MANV) {
-        this.MANV = MANV;
-    }
-    public String MAPDV;
-    public int SLVE;
-    public Date GIODV;
-    public String TINHTRANG;
-    public String MAKH;
-    public String MANV;
 }
