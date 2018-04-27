@@ -43,7 +43,7 @@ public class PhieuDatVeDTO {
         return TENNV;
     }
     public void setTENNV(String TENNV) {
-        this.TENKH = TENNV;
+        this.TENNV = TENNV;
     }
     
     public String getTENPHIM() {
